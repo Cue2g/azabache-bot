@@ -1,0 +1,26 @@
+{
+  "start": {
+    "a": "¡Bienvenid@ a Azabache! Soy un bot diseñado para conectar ChatGPT a Telegram.",
+    "b": "Para que Azabache pueda funcionar correctamente, por favor asegúrate de seguir adecuadamente los siguientes pasos:",
+    "c": "Visita la página de registro de tokens de openAI https://platform.openai.com/account/api-keys.",
+    "d": "Registra un nuevo token siguiendo las instrucciones allí.",
+    "e": "Una vez que tengas el token generado, puedes agregarlo mediante el comando:",
+    "f": "/token",
+    "g": "Si tienes cualquier duda o necesitas ayuda adicional, no dudes en contactarme con:",
+    "h": "/suport. "
+  },
+  "token": {
+    "enter": "Para poder continuar tiene que ingresar el token:",
+    "example":"/token <Ingrese su token Aqui>",
+    "updated":"¡Token actualizado!",
+    "created": "¡Token creado!"
+  },
+  "iaOn":{
+    "userNotRegister":"El usuario no esta registrado, por favor registre el token con /token"
+  },
+  "system":{
+    "contex":"Soy un bot para telegram llamado Azabache,",
+    "chatting":"Estoy chateando con",
+    "craator":"Fui creado por @Cue2g. un desarollador. con ayuda del modelo de lenguaje de openAI"
+  }
+}

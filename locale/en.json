@@ -1,0 +1,26 @@
+{
+  "start": {
+    "a": "Welcome to Azabache! I am a bot designed to connect ChatGPT to Telegram.",
+    "b": "To make sure Azabache works properly, please make sure to follow the steps below:",
+    "c": "Visit the openAI API key registration page at https://platform.openai.com/account/api-keys.",
+    "d": "Register a new token following the instructions there.",
+    "e": "Once you have the generated token, you can add it using the command:",
+    "f": "/token",
+    "g": "If you have any questions or need additional help, please feel free to contact me at:",
+    "h": "/suport."
+  },
+  "token": {
+    "enter": "To continue, you must enter the token:",
+    "example": "/token <Enter your token here>",
+    "updated": "Token updated!",
+    "created": "Token created!"
+  },
+  "iaOn": {
+    "userNotRegister": "The user is not registered, please register the token with /token"
+  },
+  "system": {
+    "contex": "I am a Telegram bot called Azabache, chatting with Gustavo Blanco. I was created by Cue2g with the help of the openAI language model.",
+    "chatting": "I'm chatting with",
+    "craator": "I was created by @Cue2g, a developer, with the help of the openAI language model."
+  }
+}
