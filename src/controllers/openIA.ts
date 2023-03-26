@@ -6,10 +6,16 @@ interface requestGPT {
   message: string;
 }
 
+interface imgFun {
+  prompt: string,
+  tokenUser: string,
+  codeLang: string
+}
+
 
 
 export async function requestGPT(
-  text: string,
+  prompt: string,
   tokenUser: string,
   codeLang: string,
   name: string,
@@ -38,7 +44,7 @@ export async function requestGPT(
     }
     messages.push({
       role: "user",
-      content: text,
+      content: prompt,
     });
 
     const requestBody = {
@@ -55,7 +61,7 @@ export async function requestGPT(
     const json = await response.json();
 
     if (response.status != 200) {
-      return getHttpError(response.status, lang)
+      return getHttpError(response.status, codeLang)
     }
 
     return {
@@ -66,6 +72,48 @@ export async function requestGPT(
     return {
       status: false,
       message: "Ha surgido un error",
+    };
+  }
+}
+
+
+export async function requestImage({prompt, tokenUser, codeLang}:imgFun){
+  try {
+
+    const url = 'https://api.openai.com/v1/images/generations';
+    const token = tokenUser;
+    
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    };
+
+    const requestBody = {
+      "prompt": prompt,
+      "n": 1,
+      "size": "1024x1024",
+    }
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(requestBody),
+    });
+    if (response.status != 200) {
+      return getHttpError(response.status, codeLang)
+    }
+
+    const json = await response.json()
+
+    return {
+      status: true,
+      message: json.data[0].url
+    };
+
+  } catch (error) {
+    return {
+      status: false,
+      message: "Error Generando la Imagen",
     };
   }
 }

@@ -1,5 +1,5 @@
 import { Telegraf } from "telegraf";
-import { requestGPT } from "./controllers/openIA";
+import { requestGPT, requestImage } from "./controllers/openIA";
 import { db } from "./firebase";
 import { language } from "./controllers/language";
 
@@ -62,6 +62,42 @@ ${lang.token.example}`,
   ctx.reply(lang.token.created);
 });
 
+bot.command("img", async (ctx) => {
+  const languageChat = ctx.message.from.language_code;
+  const codeLang = languageChat === "es" ? languageChat : "en";
+  const lang = language(codeLang);
+  const id = ctx.message.from.id;
+
+  const prompt = ctx.message.text.split("img")[1];
+
+  if (!prompt) {
+    return ctx.reply(`porfavor ingrese una prompt`);
+  }
+
+  const user = await db.collection("users").doc(id.toString()).get();
+
+  if (!user.exists) {
+    ctx.reply(
+      "El usuario no esta registrado, por favor registre el token con /addToken"
+    );
+    return;
+  }
+
+  const userData = user.data() as userData;
+  await ctx.telegram.sendChatAction(ctx.chat.id, "upload_photo");
+
+  const response = await requestImage({prompt,tokenUser: userData.token, codeLang})
+
+  if (!response.status) {
+    ctx.reply(
+      "No pude generar la imagen"
+    );
+    return;
+  }
+
+  ctx.sendPhoto(response.message)
+});
+
 bot.on("text", async (ctx) => {
   const languageChat = ctx.message.from.language_code;
   const codeLang = languageChat === "es" ? languageChat : "en";
@@ -95,7 +131,7 @@ bot.on("text", async (ctx) => {
 
   if (!response.status) {
     ctx.reply(
-      "No puedo responder por el momento, verifique el token antes de continuar"
+      "No puedo responder por el momento"
     );
     return;
   }
