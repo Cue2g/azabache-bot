@@ -69,6 +69,7 @@ export async function requestGPT(
       message: json.choices[0].message.content,
     };
   } catch (err) {
+    console.log(err)
     return {
       status: false,
       message: "Ha surgido un error",
