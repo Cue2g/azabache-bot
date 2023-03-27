@@ -133,6 +133,8 @@ bot.on("text", async (ctx) => {
     ctx.reply(
       "No puedo responder por el momento"
     );
+
+    console.log(response.message)
     return;
   }
   ctx.reply(response.message, { parse_mode: "Markdown" });
